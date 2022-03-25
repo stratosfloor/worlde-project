@@ -1,10 +1,26 @@
 import express from 'express';
+import path from 'path';
+
 
 const app = express();
 const port = 5080;
+const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
-  res.json('heeeeeeeeej');
-})
+  res.sendFile(path.join(__dirname, "client/public", "index.html"));
+});
 
+app.get("/game", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/public", "index.html"));
+});
+
+app.get("/highscore", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/public", "highscore.html"));
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/public", "about.html"));
+});
+
+app.use(express.static("client/public"));
 app.listen(port, () => console.log('Server running on port: ' + port));
