@@ -27,7 +27,6 @@ app.get("/api/word/:number", async (req, res) => {
   if(req.query.unique === 'true') {
     unique = true;
   }  
-  // const data = await fetchData(req.params.number, unique);
   res.json(await fetchData(req.params.number, unique));
 })
 
