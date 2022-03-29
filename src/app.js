@@ -19,12 +19,16 @@ app.get("/about", (req, res) => {
   res.sendFile(path.join(__dirname, "client/public", "about.html"));
 });
 
-// APIs
+// API to get number
+// number = number of letters
+// querystring unique=true for only unique letter
 app.get("/api/word/:number", async (req, res) => {
-  const data = await fetchData(req.params.number);
-  const query = req.query;
-  console.log(query);
-  res.json(data);
+  let unique = false;
+  if(req.query.unique === 'true') {
+    unique = true;
+  }  
+  // const data = await fetchData(req.params.number, unique);
+  res.json(await fetchData(req.params.number, unique));
 })
 
 app.use(express.static("client/public"));
