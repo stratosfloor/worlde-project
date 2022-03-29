@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import { fetchData } from './fetchWord.js'
+import { getWord } from './fetchWord.js'
 
 const app = express();
 const __dirname = path.resolve();
@@ -27,7 +27,7 @@ app.get("/api/word/:number", async (req, res) => {
   if(req.query.unique === 'true') {
     unique = true;
   }  
-  res.json(await fetchData(req.params.number, unique));
+  res.json(await getWord(req.params.number, unique));
 })
 
 app.use(express.static("client/public"));
