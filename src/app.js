@@ -1,10 +1,12 @@
 import express from 'express';
+import cors from "cors";
 import path from 'path';
 import { getWord } from './fetchWord.js'
 
 const app = express();
 const __dirname = path.resolve();
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/",  (req, res) => {
@@ -27,7 +29,7 @@ app.get("/api/word/:number", async (req, res) => {
   if(req.query.unique === 'true') {
     unique = true;
   }  
-  res.json(await getWord(req.params.number, unique));
+  res.json(await getWord(req.params.number, unique)); 
 })
 
 app.use(express.static("client/public"));
