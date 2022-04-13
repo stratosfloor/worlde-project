@@ -2,6 +2,7 @@ import express from 'express';
 import cors from "cors";
 import path from 'path';
 import { getWord } from './fetchWord.js'
+import { Highscore } from "./models.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -30,6 +31,17 @@ app.get("/api/word/:number", async (req, res) => {
     unique = true;
   }  
   res.json(await getWord(req.params.number, unique)); 
+})
+
+app.get("/api/highscores", async (req, res) => {
+  const highscore = await Highscore.find();
+  res.json(highscore);
+})
+
+app.post("/api/highscores", async (req, res) => {
+  const highscore = new Highscore(req.body);
+  await highscore.save();
+  res.status(201).json({ highscore })
 })
 
 app.use(express.static("client/public"));
