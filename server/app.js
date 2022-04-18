@@ -29,7 +29,7 @@ app.get("/highscore/:number", async (req, res) => {
 })
 
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/public", "about.html"));
+  res.sendFile(path.join(__dirname, "client/build", "about.html"));
 });
 
 // API
