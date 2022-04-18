@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 // Routes
 //
 app.get("/",  (req, res) => {
-  res.sendFile(path.join(__dirname, "client/public", "index.html"));
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 app.get("/highscore", async (req, res) => {
@@ -63,5 +63,6 @@ app.post("/api/highscores", async (req, res) => {
 })
 
 app.use(express.static("client/public"));
+app.use(express.static("client/build"));
 
 export default app;
