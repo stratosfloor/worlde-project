@@ -8,7 +8,7 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <title>Worlde</title>
   </head>
 
@@ -40,15 +40,19 @@
           <span>Time</span>
           <span># of guesses</span>
         </div>
-        <% highscores.forEach(function(score) { %>
-        <div class="row">
-          <span><%= score.name %></span>
-          <span><%= score.length %></span>
-          <span><%= score.unique %></span>
-          <span><%= score.time %></span>
-          <span><%= score.guesses.length %></span>
-        </div>
+        <% if(highscores.length > 0){ %>
+          <% highscores.forEach(function(score) { %>
+          <div class="row">
+            <span><%= score.name %></span>
+            <span><%= score.length %></span>
+            <span><%= score.unique %></span>
+            <span><%= score.time %>s</span>
+            <span><%= score.guesses.length %></span>
+          </div>
         <% }); %>
+      <% } else { %>
+        <h3>No highscores found</h3>
+      <% }; %>
       </div>
     </main>
   </body>
