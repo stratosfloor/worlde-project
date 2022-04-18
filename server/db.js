@@ -10,7 +10,7 @@ const getHighscores = async (number=null) => {
 };
 
 
-const sortHighscores = async () => {
+const sortedHighscores = async () => {
   const highscores = await getHighscores();
   
   highscores.sort((a,b) => a.guesses.length - b.guesses.length)
@@ -23,4 +23,4 @@ const sortHighscores = async () => {
 };
 
 
-export { getHighscores, sortHighscores}
+export { getHighscores, sortedHighscores }

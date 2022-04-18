@@ -3,7 +3,7 @@ import cors from "cors";
 import path from 'path';
 import { getWord } from './fetchWord.js'
 import { Highscore } from "./models.js";
-import { getHighscores, sortHighscores } from './db.js';
+import { getHighscores, sortedHighscores } from './db.js';
 
 const app = express();
 const __dirname = path.resolve();
@@ -19,7 +19,7 @@ app.get("/",  (req, res) => {
 });
 
 app.get("/highscore", async (req, res) => {
-  const highscores = await getHighscores();
+  const highscores = await sortedHighscores();
   res.render("index", { highscores });
 });
 
