@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from "cors";
 import path from 'path';
-import { getWord } from './fetchWord.js'
+import { getWord, fetchDictionary } from './fetchWord.js'
 import { Highscore } from "./models.js";
 import { getHighscores, sortedHighscores } from './db.js';
 
@@ -34,6 +34,11 @@ app.get("/about", (req, res) => {
 
 // API
 //
+app.get("/api/dictionary", async (req, res) => {
+  const dictionary = await fetchDictionary();
+  res.json(dictionary);
+})
+
 app.get("/api/word/:number", async (req, res) => {
   let unique = false;
   if(req.query.unique === 'true') {

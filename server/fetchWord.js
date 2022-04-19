@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 const URL = "https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json";
 
 // Fetch data with word
-const fetchData = async (numberOfLetters, uniqueLetters = false) => {
+export const fetchDictionary = async () => {
   const response = await fetch(URL);
   const data = await response.json();
   const dataList = Object.keys(data);
@@ -30,7 +30,7 @@ const filterWord = async (list, numberOfLetters, uniqueLetters = false) => {
 
 // Word to return
 export const getWord = async (numberOfLetters, uniqueLetters = false) => {
-  const list = await fetchData();
+  const list = await fetchDictionary();
   const word = await filterWord(list, numberOfLetters, uniqueLetters)
   return word;
 }
