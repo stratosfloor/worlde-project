@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { guessFeedback } from "./guessFeedback";
+import { GuessElements } from "./GuessElements";
 
 export const Game = ({ correctWord, handleGameState, unique, dictionary }) => {
   const [startTime] = useState(new Date());
@@ -38,19 +38,6 @@ export const Game = ({ correctWord, handleGameState, unique, dictionary }) => {
     setErrorText("");
     setInputText(event.target.value.toUpperCase());
   };
-
-  const guessElements = guesses.map((guess, index) => {
-    const letters = guessFeedback(guess, correctWord, correctWord.length).map(
-      (data) => {
-        return <div className={data.result}>{data.letter}</div>;
-      }
-    );
-    return (
-      <li key={index} className="row">
-        {letters}
-      </li>
-    );
-  });
 
   const submitHighscore = async (event) => {
     event.preventDefault();
@@ -123,7 +110,9 @@ export const Game = ({ correctWord, handleGameState, unique, dictionary }) => {
       <h5>Ord med {correctWord.length} bokstäver</h5>
       <h5>{5 - guesses.length} guesses left</h5>
 
-      <div className="guesses">{guessElements}</div>
+      <div className="guesses">
+        <GuessElements guesses={guesses} correctWord={correctWord} />
+      </div>
       <div> {handleWinOrLose()}</div>
       <div>
         <small>{errorText}</small>
