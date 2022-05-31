@@ -6,7 +6,6 @@ import { Game } from "./Game.js";
 function App() {
   const [correctWord, setCorrectWord] = useState(null);
   const [gameState, setGameState] = useState("start");
-  const [gameConfig, setGameConfig] = useState({});
   const [letters, setLetters] = useState({ letters: "4" });
   const [unique, setUnique] = useState({ unique: "false" });
   const [dictionary, setDictionary] = useState({});
@@ -52,10 +51,6 @@ function App() {
       letters: event.target.value,
     });
     console.log("letters: " + event.target.value);
-    setGameConfig({
-      letters: event.target.value,
-      ...unique,
-    });
   };
 
   const handleUnique = (event) => {
@@ -66,9 +61,8 @@ function App() {
     const url = `http://localhost:5080/api/word/${number}?unique=${unique}`;
     const res = await fetch(url);
     const word = await res.json();
-    const word2 = word.toUpperCase();
     setCorrectWord(word.toUpperCase());
-    console.log(word2);
+    console.log(word);
     handleGameState("playing");
   };
 
