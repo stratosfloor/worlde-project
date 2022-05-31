@@ -59,7 +59,16 @@ li > span{
 }
 .row {
   display:flex;
+  flex-direction: row;
   justify-content: center;
+  padding: 0;
+}
+
+.guesses {
+  margin: 0 auto;
+  max-width: 40vh;
+  border-bottom: 2px solid black;
+  margin-bottom: 1rem;
 }
 
 .correct, .incorrect, .misplaced {
