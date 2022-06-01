@@ -29,7 +29,18 @@ app.get("/highscore", async (req, res) => {
 });
 
 app.get("/highscore/:number", async (req, res) => {
-  const highscores = await getHighscores(req.params.number);
+  const data = await sortedHighscores(req.params.number);
+  const unique = req.query.unique;
+  const highscores = data.filter((hs) => {
+    if (unique == "true" && hs.unique == false) {
+      return false;
+    } else if (unique == "false" && hs.unique == true) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+
   res.render("index", { highscores });
 });
 
@@ -73,6 +84,6 @@ app.post("/api/highscores", async (req, res) => {
 });
 
 app.use(express.static("client/public"));
-// app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 
 export default app;
