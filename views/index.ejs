@@ -32,6 +32,25 @@
     </header>
     <main class="main-content">
       <h2>Highscore</h2>
+      <div>
+        <!-- <select name="letter" id="letter" onchange="location = this.value;"> -->
+        <select name="letter" id="letter">
+          <option value=""># of letters</option>
+          <option value="/highscore">All</option>
+          <option value="/highscore/4">4-letter</option>
+          <option value="/highscore/5">5-letter</option>
+          <option value="/highscore/6">6-letter</option>
+          <option value="/highscore/7">7-letter</option>
+          <option value="/highscore/8">8-letter</option>
+          <option value="/highscore/9">9-letter</option>
+          <option value="/highscore/10">10-letter</option>
+        </select>
+        <div>
+          <label for="unique">Unique letters: </label>
+          <input type="checkbox" id="unique" name="unique" value="true" />
+        </div>
+        <button name="show" onclick="{handleClick()}">Show</button>
+      </div>
       <div class="highscore">
         <div class="row heading">
           <span>Name</span>
@@ -40,20 +59,32 @@
           <span>Time</span>
           <span># of guesses</span>
         </div>
-        <% if(highscores.length > 0){ %>
-          <% highscores.forEach(function(score) { %>
-          <div class="row">
-            <span><%= score.name %></span>
-            <span><%= score.length %></span>
-            <span><%= score.unique %></span>
-            <span><%= score.time %>s</span>
-            <span><%= score.guesses.length %></span>
-          </div>
-        <% }); %>
-      <% } else { %>
+        <% if(highscores.length > 0){ %> <% highscores.forEach(function(score) {
+        %>
+        <div class="row">
+          <span><%= score.name %></span>
+          <span><%= score.length %></span>
+          <span><%= score.unique %></span>
+          <span><%= score.time %>s</span>
+          <span><%= score.guesses.length %></span>
+        </div>
+        <% }); %> <% } else { %>
         <h3>No highscores found</h3>
-      <% }; %>
+        <% }; %>
       </div>
     </main>
+    <script>
+      const handleClick = () => {
+        const unique = document.querySelector("#unique").checked;
+        const letter = document.querySelector("#letter").value;
+        let url = letter;
+        if (unique) {
+          url += "?unique=true";
+        } else {
+          url += "?unique=false";
+        }
+        window.location.href = url;
+      };
+    </script>
   </body>
 </html>
