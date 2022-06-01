@@ -8,6 +8,4 @@ const Highscore = mongoose.model("Highscore", {
   unique: Boolean,
 });
 
-// j6qmeaYfKPiQzZYq
-
 export { Highscore };
