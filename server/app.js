@@ -8,10 +8,13 @@ import { getHighscores, sortedHighscores } from "./db.js";
 
 const app = express();
 const __dirname = path.resolve();
-const DB_URL =
-  "mongodb+srv://emilnoren:j6qmeaYfKPiQzZYq@cluster0.j0lsw.mongodb.net/myFirstDatabase";
+const MONGODB_URI = "";
 
-mongoose.connect(DB_URL);
+if (!MONGODB_URI) {
+  throw new Error("Please define MONGODB_URI to connect to database");
+} else {
+  mongoose.connect(MONGODB_URI);
+}
 
 app.use(cors());
 app.use(express.json());
